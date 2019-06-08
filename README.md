@@ -27,9 +27,11 @@ DECLARE @RegexPattern NVARCHAR(MAX) = N'([<]br\s*/[>])';
 DECLARE @Replacement NVARCHAR(MAX) = N''
 DECLARE @IsCaseSensitive BIT = 0;
 
-SELECT *
-FROM regex.Match(@SourceText, @RegexPattern, @IsCaseSensitive);
+SELECT regex.Replace(@SourceText, @RegexPattern, @Replacement, @IsCaseSensitive);
 ```
+
+Результат:
+My first line  My second line
 
 ## Hash
 Стандартная функция HashBytes ограничена длиной строки равной 8КБ. В данной реализации такого ограничения нет.
