@@ -14,13 +14,43 @@ namespace Coding4fun.MsSql.Regex
 	public static class RegexExtension
 	{
 		/// <summary>
+		///     Замена части текста, найденного регулярным выражением.
+		/// </summary>
+		/// <param name="inputText">Текст, в котором происходит поиск.</param>
+		/// <param name="pattern">Шаблон регулярного выражения.</param>
+		/// <param name="replacement">Чем заменять.</param>
+		/// <param name="isCaseSensitive">Зависит от регистра?</param>
+		/// <returns></returns>
+		[SqlFunction(IsDeterministic = true, DataAccess = DataAccessKind.Read)]
+		public static SqlString Replace(SqlString inputText, SqlString pattern, SqlString replacement,
+			bool isCaseSensitive)
+		{
+			if (inputText.IsNull
+			    || string.IsNullOrEmpty(inputText.Value)
+			    || pattern.IsNull
+			    || string.IsNullOrEmpty(pattern.Value)
+			)
+			{
+				return SqlString.Null;
+			}
+
+			TextRegex regex = isCaseSensitive
+				? new TextRegex(pattern.Value)
+				: new TextRegex(pattern.Value, RegexOptions.IgnoreCase);
+
+			string result = regex.Replace(inputText.Value, replacement.IsNull ? "" : replacement.Value);
+
+			return new SqlString(result);
+		}
+
+		/// <summary>
 		///     Поиск совпадений по регулярному выражению.
 		/// </summary>
 		/// <param name="inputText">Текст, в котором происходит поиск.</param>
 		/// <param name="pattern">Шаблон регулярного выражения.</param>
 		/// <param name="isCaseSensitive">Зависит от регистра?</param>
 		/// <returns>Список найденных групп.</returns>
-		[SqlFunction(FillRowMethodName = nameof(GetRegexRow))]
+		[SqlFunction(FillRowMethodName = nameof(GetRegexRow), IsDeterministic = true, DataAccess = DataAccessKind.Read)]
 		public static ArrayList Match(SqlString inputText, SqlString pattern, bool isCaseSensitive)
 		{
 			ArrayList result = new ArrayList();
