@@ -32,7 +32,7 @@ GO
 
 CREATE FUNCTION regex.Match (
   @inputText NVARCHAR(MAX),
-  @pattern nvarchar(MAX),
+  @pattern NVARCHAR(MAX),
   @isCaseSensitive BIT
 )
 RETURNS TABLE
@@ -40,3 +40,26 @@ AS
 RETURN
   SELECT *
   FROM regex.MatchInternal(@inputText, @pattern, @isCaseSensitive);
+GO
+
+CREATE FUNCTION regex.ReplaceInternal (
+  @inputText NVARCHAR(MAX),
+  @pattern NVARCHAR(MAX),
+  @replacement NVARCHAR(MAX),
+  @isCaseSensitive BIT
+)
+RETURNS NVARCHAR(MAX)
+EXTERNAL NAME Regex.[Coding4fun.MsSql.Regex.RegexExtension].Replace;
+GO
+
+CREATE FUNCTION regex.Replace (
+  @inputText NVARCHAR(MAX),
+  @pattern NVARCHAR(MAX),
+  @replacement NVARCHAR(MAX),
+  @isCaseSensitive BIT
+)
+RETURNS NVARCHAR(MAX)
+AS
+BEGIN
+  RETURN regex.ReplaceInternal(@inputText, @pattern, @replacement, @isCaseSensitive);
+END
