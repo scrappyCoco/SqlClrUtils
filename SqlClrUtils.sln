@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regex", "Regex\Regex.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hash", "Hash\Hash.csproj", "{A4E88C15-7A18-45B5-A479-7DC6F76F50A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeProxy", "CodeProxy\CodeProxy.csproj", "{C4106DE5-EDAA-4D52-93E5-A7C155340BA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{A4E88C15-7A18-45B5-A479-7DC6F76F50A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4E88C15-7A18-45B5-A479-7DC6F76F50A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4E88C15-7A18-45B5-A479-7DC6F76F50A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4106DE5-EDAA-4D52-93E5-A7C155340BA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4106DE5-EDAA-4D52-93E5-A7C155340BA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4106DE5-EDAA-4D52-93E5-A7C155340BA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4106DE5-EDAA-4D52-93E5-A7C155340BA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
